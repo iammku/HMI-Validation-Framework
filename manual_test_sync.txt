@@ -1,0 +1,15 @@
+Manual Test Case: Cluster Speed Verification
+
+1. Power ON the cluster ECU setup.
+2. Launch Vehicle Function Simulator (VFS).
+3. Connect CAN communication channel.
+4. Verify cluster boot animation.
+5. Send speed CAN signal using VFS.
+6. Increase speed gradually from 0 to 120 km/h.
+7. Observe cluster speedometer response.
+8. Verify no lag or incorrect speed jump.
+9. Verify warning indicators remain stable.
+10. Reduce speed back to 0 km/h.
+11. Verify speedometer returns properly.
+12. Capture logs and screenshots.
+13. Raise Jira defect if mismatch observed.
