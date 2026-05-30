@@ -35,3 +35,5 @@ print(cluster_data.items())
 #only loop through keys
 for values in cluster_data:
     print(values)
+for val in cluster_data.values():
+    print(val)
