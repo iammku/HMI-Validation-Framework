@@ -1,4 +1,43 @@
-#Intrument cluster warning system
+"""
+Day 4 Project
+
+Instrument Cluster Warning System
+
+Problem Statement:
+Build a vehicle health monitoring system that validates:
+- Speed
+- Fuel
+- Seatbelt
+- Door
+- Ignition
+
+Generate:
+- Vehicle Readiness Status
+- Active Warning
+- Health Score
+- Cluster Health Report
+
+Concepts Practiced:
+- Functions
+- Return Statements
+- Multiple Return Values
+- Function Communication
+- Local Scope
+- Modular Programming
+- Data Flow
+- Health Score Calculation
+- Warning Prioritization
+
+Interview Questions:
+1. Difference between print() and return()?
+2. What is modular programming?
+3. What is function communication?
+4. What are multiple return values?
+5. Why use functions instead of writing all code in one block?
+6. How is health score calculated?
+7. How does data flow between functions?
+8. Explain the execution flow of this project.
+"""
 def check_speed(speed):
     if speed >= 120:
         updated_speed = speed - 20
