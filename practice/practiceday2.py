@@ -1,7 +1,4 @@
-"""
-Day 4 Project
-
-Instrument Cluster Warning System
+"""Instrument Cluster Warning System
 
 Problem Statement:
 Build a vehicle health monitoring system that validates:
@@ -16,17 +13,6 @@ Generate:
 - Active Warning
 - Health Score
 - Cluster Health Report
-
-Concepts Practiced:
-- Functions
-- Return Statements
-- Multiple Return Values
-- Function Communication
-- Local Scope
-- Modular Programming
-- Data Flow
-- Health Score Calculation
-- Warning Prioritization
 
 Interview Questions:
 1. Difference between print() and return()?
