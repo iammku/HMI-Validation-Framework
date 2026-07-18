@@ -1,0 +1,9 @@
+INFO:root:This is information
+DEBUG:root:DEV attention required
+WARNING:root:Low fuel
+ERROR:root:No file present
+CRITICAL:root:cluster crashed
+ERROR:root:No file present
+CRITICAL:root:cluster crashed
+2026-07-16 00:59:55,990 ERROR No file present
+2026-07-16 00:59:55,991 CRITICAL cluster crashed
