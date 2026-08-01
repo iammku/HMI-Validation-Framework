@@ -1,13 +1,13 @@
 import json
 import yaml
-from pathlib import Path
 from core.logger import logger
+from core.paths import CONFIG_DIR
 
 class ConfigurationError(Exception):
     """Raised when the framework configuration is invalid."""
     pass
 
-REQUIRED_KEYS = ["vehicle", "ignition"]
+REQUIRED_KEYS = ["vehicle", "ignition", "gear"]
 
 
 def validate_required_keys(config):
@@ -28,12 +28,8 @@ def validate_values(config):
         logger.error("Vehicle cannot be None")
         raise ConfigurationError("Vehicle cannot be None")
 
-current_file=Path(__file__)
-# Move from core/ to project root
-project_root= current_file.parent.parent
-
-config_path=project_root/"config"/"test_config.json"
-#config_path=project_root/"config"/"test_config.yaml"
+#config_path=CONFIG_DIR/"test_config.json"
+config_path=CONFIG_DIR/"test_config.yaml"
 if not config_path.exists():
     logger.error(f"Configuration file not found: {config_path}")
     raise FileNotFoundError(

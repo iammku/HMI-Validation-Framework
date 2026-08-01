@@ -8,3 +8,4 @@ def show_cluster_info():
     print(config["speed"])
     print(config["gear"])
     print(config["theme"])
+show_cluster_info()

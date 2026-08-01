@@ -1,10 +1,8 @@
 import logging
-from pathlib import Path
+from core.paths import LOG_DIR
 
-project_root= Path(__file__).parent.parent
-log_dir= project_root/"logs"
-log_dir.mkdir(exist_ok=True)
-log_file=log_dir/"framework.log"
+LOG_DIR.mkdir(exist_ok=True)
+log_file=LOG_DIR/"framework.log"
 
 logger= logging.getLogger("framework")
 logger.setLevel(logging.INFO)
