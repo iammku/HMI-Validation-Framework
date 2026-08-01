@@ -1,0 +1,8 @@
+{
+    "vehicle": "Mustang",
+    "speed": 1800,
+    "gear": "D",
+    "ignition": true,
+    "theme": "Dark",
+    "language": "English"
+}

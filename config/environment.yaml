@@ -1,0 +1,11 @@
+vehicle:
+  model: Ford Raptor
+  speed: 60
+  gear: D
+
+driver:
+  seatbelt: true
+  language: English
+
+display:
+  theme: Dark

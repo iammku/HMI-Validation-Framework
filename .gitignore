@@ -1,29 +1,30 @@
-# --- PyCharm / IDE ---
+# ---------- IDE ----------
 .idea/
 .vscode/
 *.iml
 
-# --- Python ---
+# ---------- Python ----------
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
 .Python
+
 env/
 venv/
+.venv/
 .env
-.venv
 
-# --- Testing / PyTest ---
+# ---------- Testing ----------
 .pytest_cache/
+.coverage
+htmlcov/
 
-# --- Logs ---
-framework.log
+# ---------- Logs ----------
+logs/
 *.log
 
-# --- Reports ---
+# ---------- Reports ----------
 reports/
 
-# --- OS / Miscellaneous ---
+# ---------- macOS / Windows ----------
 .DS_Store
 Thumbs.db
