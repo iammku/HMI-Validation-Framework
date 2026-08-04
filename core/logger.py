@@ -4,6 +4,7 @@ from core.paths import LOG_DIR
 LOG_DIR.mkdir(exist_ok=True)
 log_file=LOG_DIR/"framework.log"
 
+#logger= logging.getLogger(__name__)
 logger= logging.getLogger("framework")
 logger.setLevel(logging.INFO)
 
