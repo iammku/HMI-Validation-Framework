@@ -1,11 +1,9 @@
-from core.config_reader import get_config
+class Cluster:
+    def __init__(self, config):
+        self.config=config
 
-config=get_config()
-
-
-def show_cluster_info():
-    print(config["vehicle"])
-    print(config["speed"])
-    print(config["gear"])
-    print(config["theme"])
-show_cluster_info()
+    def show_cluster_info(self):
+        print(self.config["vehicle"])
+        print(self.config.get("speed", "Unknown"))
+        print(self.config.get("gear"))
+        print(self.config["theme"])
