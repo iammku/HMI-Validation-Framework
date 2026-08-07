@@ -3,3 +3,4 @@ speed: 120
 theme: Dark
 ignition: true
 gear: Park
+seatbelt_warning: true
