@@ -1,8 +1,11 @@
 from core.warning_manager import WarningManager
 class Cluster:
     def __init__(self, abc):
-        self._config=abc
-        self.warning1=WarningManager(abc)
+        self._config = abc
+        self.warning1 = WarningManager(abc)
+        self._speed = abc["speed"]
+        self._gear = abc["gear"]
+        self._ignition = abc["ignition"]
 
     def show_cluster_info(self):
         print(f"Vehicle: {self.get_vehicle()}")
@@ -13,13 +16,13 @@ class Cluster:
     def get_vehicle(self):
         return self._config.get("vehicle")
     def get_speed(self):
-        return self._config["speed"]
+        return self._speed
     def get_gear(self):
-        return self._config["gear"]
+        return self._gear
     def get_theme(self):
         return self._config["theme"]
     def is_ignition_on(self):
-        return self._config["ignition"]
+        return self._ignition
     def is_speeding(self):
         return self.get_speed()>100
     def is_dark_theme(self):
