@@ -18,3 +18,5 @@ def test_speeding(cluster):
     assert cluster.is_speeding() == True
 def test_vehicle_move(cluster):
     assert cluster.can_vehicle_move() == False
+def test_warning(cluster):
+    assert cluster.warning1.is_seatbelt_warning_active()==True
