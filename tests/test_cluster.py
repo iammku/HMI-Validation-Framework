@@ -1,3 +1,6 @@
+import pytest
+from core.cluster import VehicleStateError
+
 def test_vehicle(framework_logger, cluster):
     framework_logger.info("Running vehicle test")
     assert cluster.get_vehicle() == "Mustang"
@@ -20,3 +23,9 @@ def test_vehicle_move(cluster):
     assert cluster.can_vehicle_move() == False
 def test_warning(cluster):
     assert cluster.warning1.is_seatbelt_warning_active()==True
+def test_accelerate_without_ignition(cluster):
+    with pytest.raises(VehicleStateError):
+        cluster.accelerate(20)
+def test_invalid_gear(cluster):
+    with pytest.raises(ValueError):
+        cluster.shift_gear("xyz")

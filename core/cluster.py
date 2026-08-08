@@ -1,5 +1,12 @@
 from core.warning_manager import WarningManager
+
+VALID_GEARS = ["P", "R", "N", "D"]
+class VehicleStateError(Exception):
+    """Raised when Invalid vehicle operation"""
+    pass
+
 class Cluster:
+
     def __init__(self, abc):
         self._config = abc
         self.warning1 = WarningManager(abc)
@@ -32,3 +39,30 @@ class Cluster:
             self.is_ignition_on() and
             self.get_gear().lower() != "park"
         )
+    def start_engine(self):
+        self._ignition=True
+    def stop_engine(self):
+        if self._speed > 0:
+            raise VehicleStateError(
+                "Cannot stop engine while vehicle moving"
+            )
+        self._ignition = False
+
+    def shift_gear(self, gear):
+        if gear not in VALID_GEARS:
+            raise ValueError(
+                f"Invalid gear: {gear}"
+            )
+        self._gear = gear
+    def accelerate(self, increment):
+        if not self._ignition:
+            raise VehicleStateError(
+                "Cannot accelerate because ignition is OFF"
+            )
+        if self._gear != "D":
+            raise VehicleStateError(
+                "Cannot accelerate because gear is not in Drive"
+            )
+        self._speed+=increment
+    def brake(self, decrement):
+        self._speed= max(0, self._speed-decrement)
