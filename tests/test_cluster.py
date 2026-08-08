@@ -29,3 +29,33 @@ def test_accelerate_without_ignition(cluster):
 def test_invalid_gear(cluster):
     with pytest.raises(ValueError):
         cluster.shift_gear("xyz")
+def test_engine_start(cluster):
+    cluster.start_engine()
+    assert cluster.is_ignition_on()
+def test_accelerate(cluster):
+    cluster.start_engine()
+    cluster.shift_gear("D")
+    cluster.accelerate(20)
+    assert cluster.get_speed() == 140
+def test_brake(cluster):
+    cluster.start_engine()
+    cluster.shift_gear("D")
+    cluster.accelerate(40)
+    cluster.brake(10)
+
+    assert cluster.get_speed() == 150
+def test_seatbelt_warning_off(cluster):
+    cluster.start_engine()
+    cluster.shift_gear("D")
+    cluster.accelerate(20)
+    cluster.fasten_seatbelt()
+
+    assert not cluster.warning1.is_seatbelt_warning_active()
+
+def test_stop_engine_while_moving(cluster):
+    cluster.start_engine()
+    cluster.shift_gear("D")
+    cluster.accelerate(20)
+
+    with pytest.raises(VehicleStateError):
+        cluster.stop_engine()

@@ -2,5 +2,6 @@ vehicle: Mustang
 speed: 120
 theme: Dark
 ignition: true
-gear: Park
+gear: P
 seatbelt_warning: true
+fuel_level : 50

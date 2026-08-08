@@ -1,6 +1,7 @@
 from core.warning_manager import WarningManager
 
 VALID_GEARS = ["P", "R", "N", "D"]
+
 class VehicleStateError(Exception):
     """Raised when Invalid vehicle operation"""
     pass
@@ -9,10 +10,16 @@ class Cluster:
 
     def __init__(self, abc):
         self._config = abc
-        self.warning1 = WarningManager(abc)
+
+        #Managers
+        self.warning1 = WarningManager(self)
+
+        #Run time state
         self._speed = abc["speed"]
         self._gear = abc["gear"]
         self._ignition = abc["ignition"]
+        self._seatbelt_fastened = abc.get("seatbelt_fastened")
+        self._fuel_level = abc["fuel_level"]
 
     def show_cluster_info(self):
         print(f"Vehicle: {self.get_vehicle()}")
@@ -20,6 +27,8 @@ class Cluster:
         print(f"Gear: {self.get_gear()}")
         print(f"Theme: {self.get_theme()}")
         print(f"Ignition state: {self.is_ignition_on()}")
+
+    #Getters
     def get_vehicle(self):
         return self._config.get("vehicle")
     def get_speed(self):
@@ -30,6 +39,12 @@ class Cluster:
         return self._config["theme"]
     def is_ignition_on(self):
         return self._ignition
+    def is_seatbelt_fastened(self):
+        return self._seatbelt_fastened
+    def get_fuel_level(self):
+        return self._fuel_level
+
+
     def is_speeding(self):
         return self.get_speed()>100
     def is_dark_theme(self):
@@ -39,6 +54,8 @@ class Cluster:
             self.is_ignition_on() and
             self.get_gear().lower() != "park"
         )
+
+    #Behaviours
     def start_engine(self):
         self._ignition=True
     def stop_engine(self):
@@ -66,3 +83,7 @@ class Cluster:
         self._speed+=increment
     def brake(self, decrement):
         self._speed= max(0, self._speed-decrement)
+    def fasten_seatbelt(self):
+        self._seatbelt_fastened = True
+    def unfasten_seatbelt(self):
+        self._seatbelt_fastened = False
