@@ -1,5 +1,6 @@
 import pytest
 from core.cluster import VehicleStateError
+from core.enums import Gear
 
 def test_vehicle(framework_logger, cluster):
     framework_logger.info("Running vehicle test")
@@ -12,7 +13,7 @@ def test_speed(cluster):
     assert cluster.get_speed() == 120
     assert cluster.is_speeding() == True
 def test_gear(cluster):
-    assert cluster.get_gear() == "Park"
+    assert cluster.get_gear() == Gear.PARK
 def test_theme(cluster):
     expected_theme= "dark"
     assert cluster.get_theme().lower() == expected_theme
@@ -34,19 +35,19 @@ def test_engine_start(cluster):
     assert cluster.is_ignition_on()
 def test_accelerate(cluster):
     cluster.start_engine()
-    cluster.shift_gear("D")
+    cluster.shift_gear(Gear.DRIVE)
     cluster.accelerate(20)
     assert cluster.get_speed() == 140
 def test_brake(cluster):
     cluster.start_engine()
-    cluster.shift_gear("D")
+    cluster.shift_gear(Gear.DRIVE)
     cluster.accelerate(40)
     cluster.brake(10)
 
     assert cluster.get_speed() == 150
 def test_seatbelt_warning_off(cluster):
     cluster.start_engine()
-    cluster.shift_gear("D")
+    cluster.shift_gear(Gear.DRIVE)
     cluster.accelerate(20)
     cluster.fasten_seatbelt()
 
@@ -54,7 +55,7 @@ def test_seatbelt_warning_off(cluster):
 
 def test_stop_engine_while_moving(cluster):
     cluster.start_engine()
-    cluster.shift_gear("D")
+    cluster.shift_gear(Gear.DRIVE)
     cluster.accelerate(20)
 
     with pytest.raises(VehicleStateError):

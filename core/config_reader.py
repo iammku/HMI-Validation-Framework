@@ -3,11 +3,9 @@ import yaml
 from core.logger import logger
 from core.paths import CONFIG_DIR
 from core.environment import get_environment
+from core.exception import ConfigurationError
+from core.enums import Gear
 
-
-class ConfigurationError(Exception):
-    """Raised when the framework configuration is invalid."""
-    pass
 
 REQUIRED_KEYS = ["vehicle", "ignition", "gear"]
 
@@ -51,14 +49,13 @@ def validate_values(config):
     if vehicle is None:
         logger.error("Vehicle cannot be None")
         raise ConfigurationError("Vehicle cannot be None")
-
-#config_path=CONFIG_DIR/"test_config.json"
-# config_path=CONFIG_DIR/"test_config.yaml"
-# if not config_path.exists():
-#     logger.error(f"Configuration file not found: {config_path}")
-#     raise FileNotFoundError(
-#         f"Configuration file not found: {config_path}"
-#     )
+    try:
+        Gear(config["gear"])
+    except ValueError as e:
+        logger.error(f"Invalid gear '{config['gear']}'")
+        raise ConfigurationError(
+            f"Invalid gear '{config['gear']}' in configuration."
+        ) from e
 
 
 def load_config(config_path):

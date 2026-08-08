@@ -1,10 +1,8 @@
 from core.warning_manager import WarningManager
+from core.exception import VehicleStateError
+from core.enums import Gear
 
-VALID_GEARS = ["P", "R", "N", "D"]
-
-class VehicleStateError(Exception):
-    """Raised when Invalid vehicle operation"""
-    pass
+#VALID_GEARS = ["P", "R", "N", "D"]
 
 class Cluster:
 
@@ -16,7 +14,8 @@ class Cluster:
 
         #Run time state
         self._speed = abc["speed"]
-        self._gear = abc["gear"]
+        #self._gear = abc["gear"]
+        self._gear = Gear(abc["gear"])
         self._ignition = abc["ignition"]
         self._seatbelt_fastened = abc.get("seatbelt_fastened")
         self._fuel_level = abc["fuel_level"]
@@ -52,7 +51,8 @@ class Cluster:
     def can_vehicle_move(self):
         return (
             self.is_ignition_on() and
-            self.get_gear().lower() != "park"
+            #self.get_gear().lower() != "park"
+            self.get_gear() != Gear.PARK
         )
 
     #Behaviours
@@ -65,8 +65,8 @@ class Cluster:
             )
         self._ignition = False
 
-    def shift_gear(self, gear):
-        if gear not in VALID_GEARS:
+    def shift_gear(self, gear:Gear):
+        if not isinstance(gear, Gear):
             raise ValueError(
                 f"Invalid gear: {gear}"
             )
@@ -76,7 +76,7 @@ class Cluster:
             raise VehicleStateError(
                 "Cannot accelerate because ignition is OFF"
             )
-        if self._gear != "D":
+        if self._gear != Gear.DRIVE:
             raise VehicleStateError(
                 "Cannot accelerate because gear is not in Drive"
             )
