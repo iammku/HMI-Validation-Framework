@@ -2,6 +2,7 @@ import pytest
 from core.logger import logger
 from core.config_reader import get_config
 from core.cluster import Cluster
+from core.vehicle_simulator import VehicleSimulator
 
 @pytest.fixture(scope="session")
 def config():
@@ -22,3 +23,8 @@ def cluster(config):
     #c1=Cluster(config)
     #return c1, can do this as well
     return Cluster(config)
+
+@pytest.fixture(scope="function")
+def simulator(cluster):
+    c2= VehicleSimulator(cluster)
+    return c2

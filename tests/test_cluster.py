@@ -60,3 +60,15 @@ def test_stop_engine_while_moving(cluster):
 
     with pytest.raises(VehicleStateError):
         cluster.stop_engine()
+def test_seatbelt_warning(cluster, simulator):
+    simulator.start_vehicle()
+    simulator.shift_to_drive()
+    simulator.press_accelerator(20)
+    assert cluster.warning1.is_seatbelt_warning_active()
+
+def test_brake1(cluster, simulator):
+    simulator.start_vehicle()
+    simulator.shift_to_drive()
+    simulator.press_accelerator(40)
+    simulator.press_brake(10)
+    assert cluster.get_speed() == 150

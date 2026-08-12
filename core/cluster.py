@@ -1,6 +1,7 @@
 from core.warning_manager import WarningManager
 from core.exception import VehicleStateError
 from core.enums import Gear
+from core.vehicle_simulator import VehicleSimulator
 
 #VALID_GEARS = ["P", "R", "N", "D"]
 
@@ -11,6 +12,7 @@ class Cluster:
 
         #Managers
         self.warning1 = WarningManager(self)
+        self._simulator = VehicleSimulator(self)
 
         #Run time state
         self._speed = abc["speed"]
