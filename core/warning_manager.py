@@ -1,6 +1,7 @@
 class WarningManager:
     """Handles all warnings related logic for cluster"""
     def __init__(self, cluster):
+        # It saves the reference to the cluster
         self._cluster=cluster
     def is_seatbelt_warning_active(self):
         """Seatbelt warnings active only when

@@ -1,6 +1,9 @@
 import pytest
 from core.cluster import VehicleStateError
 from core.enums import Gear
+from core.vehicle_event import VehicleEvent
+from core.enums import VehicleEventType
+from core.exception import EventHandlingError
 
 def test_vehicle(framework_logger, cluster):
     framework_logger.info("Running vehicle test")
@@ -72,3 +75,13 @@ def test_brake1(cluster, simulator):
     simulator.press_accelerator(40)
     simulator.press_brake(10)
     assert cluster.get_speed() == 150
+
+def test_unsupported_event(cluster, dispatcher):
+    event = VehicleEvent(
+        VehicleEventType.DOOR_OPEN
+    )
+    with pytest.raises(EventHandlingError):
+        dispatcher.dispatch(event)
+def test_invalid_event_type():
+    with pytest.raises(EventHandlingError):
+        VehicleEvent("BRAKE", 10)

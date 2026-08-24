@@ -1,18 +1,35 @@
-from core.enums import Gear
+from core.enums import Gear, VehicleEventType
+from core.vehicle_event import VehicleEvent
 
 class VehicleSimulator:
     """simulate driver actions and external vehicle inputs"""
-    def __init__(self, cluster):
+    def __init__(self, cluster, dispatcher):
         self._cluster = cluster
+        self._dispatcher = dispatcher
 
+    # def start_vehicle(self):
+    #     return self._cluster.start_engine()
     def start_vehicle(self):
-        return self._cluster.start_engine()
+        event = VehicleEvent(
+            VehicleEventType.START_VEHICLE
+        )
+        self._dispatcher.dispatch(event)
 
     def press_accelerator(self, value):
-        return self._cluster.accelerate(value)
+        event = VehicleEvent(
+            VehicleEventType.ACCELERATE,
+            value
+        )
+        self._dispatcher.dispatch(event)
 
+    # def press_brake(self, value):
+    #     return self._cluster.brake(value)
     def press_brake(self, value):
-        return self._cluster.brake(value)
+        event = VehicleEvent(
+            VehicleEventType.BRAKE,
+            value
+        )
+        self._dispatcher.dispatch(event)
 
     def shift_to_drive(self):
         return self._cluster.shift_gear(Gear.DRIVE)

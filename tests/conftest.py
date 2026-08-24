@@ -3,6 +3,7 @@ from core.logger import logger
 from core.config_reader import get_config
 from core.cluster import Cluster
 from core.vehicle_simulator import VehicleSimulator
+from core.event_dispatcher import EventDispatcher
 
 @pytest.fixture(scope="session")
 def config():
@@ -25,6 +26,10 @@ def cluster(config):
     return Cluster(config)
 
 @pytest.fixture(scope="function")
-def simulator(cluster):
-    c2= VehicleSimulator(cluster)
+def dispatcher(cluster):
+    return EventDispatcher(cluster)
+
+@pytest.fixture(scope="function")
+def simulator(cluster, dispatcher):
+    c2= VehicleSimulator(cluster, dispatcher)
     return c2

@@ -9,10 +9,9 @@ class Cluster:
 
     def __init__(self, abc):
         self._config = abc
-
         #Managers
         self.warning1 = WarningManager(self)
-        self._simulator = VehicleSimulator(self)
+        #self._simulator = VehicleSimulator(self)
 
         #Run time state
         self._speed = abc["speed"]
